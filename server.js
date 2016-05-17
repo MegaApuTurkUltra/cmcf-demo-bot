@@ -11,6 +11,7 @@ var PROJECT_ID = 109772772;
 var cloud;
 
 var running = false;
+var startTime;
 
 app.post("/run", function(req, res){
   setServerStatus(!running);
@@ -76,6 +77,7 @@ function setServerStatus(flag) {
   console.log("Server running: " + flag);
   if (flag) {
     running = true;
+	startTime = Date.now();
     initCloud();
   }
   else {
@@ -92,6 +94,12 @@ function server() {
   if (!running) {
     return;
   }
+  
+  if(Date.now() - startTime > 5 * 60 * 1000){
+    running = false;
+    return;
+  }
+  
   try {
     var p1 = decode(cloud.get("\u2601 cloud1"));
     if (p1 != null) {
