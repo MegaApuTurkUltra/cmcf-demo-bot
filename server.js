@@ -113,7 +113,7 @@ function server() {
       x += (p1x - x) / 20;
       y += (p1y - y) / 20;
     }
-    cloud.set('\u2601 cloud3', encode(["BOT follower", Math.random(), x, y, 90 - (dir * 180 / Math.PI)]));
+    cloud.set('\u2601 cloud5', encode(["BOT p1 follower", Math.random(), x, y, 90 - (dir * 180 / Math.PI)]));
   }
   catch (e) {
     running = false;
