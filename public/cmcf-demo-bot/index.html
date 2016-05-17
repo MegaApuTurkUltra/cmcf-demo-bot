@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>CMCF Demo Bot</title>
+        <link rel="shortcut icon" href="http://aputurk.tk/favicon.ico" />
+        <style>
+            @keyframes zoom-in {
+                from {
+                    transform: translateY(-50%) translateX(-50%) scale(0);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(-50%) translateX(-50%) scale(1);
+                    opacity: 1;
+                }
+            }
+        
+            body {
+                background: #222;
+                color: white;
+                text-align: center;
+                font-family: monospace;
+            }
+            
+            #container {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                animation: zoom-in 0.5s 1s forwards;
+                opacity: 0;
+                transform: translateY(-50%) translateX(-50%) scale(0);
+            }
+            
+            h1 {
+                font-size: 5em;
+                text-shadow: 0px 0px 10px white;
+            }
+            
+            h2 {
+                font-size: 4em;
+            }
+            
+            a {
+                color: #aaf;
+                text-shadow: 0px 0px 10px #aaf;
+            }
+            
+            button {
+                font-family: monospace;
+                font-size: 3em;
+                background: linear-gradient(#334 0%, #223 100%);
+                border: 2px solid white;
+                border-radius: 0.2em;
+                padding: 0.5em;
+                color: white;
+                box-shadow: 5px 5px 5px black, inset 0px 0px 10px white;
+                position: relative;
+                transition: all 0.2s;
+                outline: none;
+            }
+            
+            button:hover {
+                box-shadow: 5px 5px 5px black, inset 0px 0px 10px 2px white, 0px 0px 5px white;
+                background: linear-gradient(#445 0%, #334 100%);
+                text-shadow: 0px 0px 5px white;
+            }
+            
+            button:active {
+                box-shadow: inset 0px 0px 10px 2px white, 0px 0px 5px white;
+                left: 5px;
+                top: 5px;
+                background: linear-gradient(#334 0%, #445 100%);
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <h1>Bot running: <span id="status"></span></h1>
+            <button onclick="bot()">Start/Stop Bot</button>
+            <h2><a href="https://scratch.mit.edu/projects/109772772/" target="_blank">Go to project</a></h2>
+        </div>
+        
+        <script src="/requestp.js"></script>
+        <script>
+            /* global requestp */
+            function checkStatus(){
+                requestp.get("status").then(function(res){
+                    document.querySelector("#status").textContent = res;
+                    setTimeout(checkStatus, 2000);
+                });
+            }
+            checkStatus();
+            
+            function bot(){
+                requestp.post("run").then(function(res){
+                    document.querySelector("#status").textContent = res;
+                });
+            }
+        </script>
+    </body>
+</html>

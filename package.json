@@ -1,0 +1,15 @@
+{
+  "name": "cmcf-bot",
+  "version": "0.0.0",
+  "description": "Cloud bot for CMCF demo",
+  "main": "server.js",
+  "repository": "none",
+  "license": "MIT",
+  "author": "MegaApuTurkUltra <apu@aputurk.tk>",
+  "dependencies": {
+    "async": "~0.2.8",
+    "express": "~3.2.4",
+    "scratch-api": "^1.1.5",
+    "socket.io": "~0.9.14"
+  }
+}
