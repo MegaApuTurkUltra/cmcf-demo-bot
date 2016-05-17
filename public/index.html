@@ -82,14 +82,27 @@
         <div id="container">
             <h1>Bot running: <span id="status"></span></h1>
             <button onclick="bot()">Start/Stop Bot</button>
-			<p>The bot will stop after 5 minutes</p>
+			<p>The bot will stop after 5 minutes. As a courtesy to others, please close this page once you are done.</p>
             <h2><a href="https://scratch.mit.edu/projects/109772772/" target="_blank">Go to project</a></h2>
         </div>
         
         <script src="/requestp.js"></script>
         <script>
+			var focused = true;
+
+			window.onfocus = function() {
+				focused = true;
+			};
+			window.onblur = function() {
+				focused = false;
+			};
+		
             /* global requestp */
             function checkStatus(){
+				if(!focused){
+					setTimeout(checkStatus, 2000);
+					return;
+				}
                 requestp.get("status").then(function(res){
                     document.querySelector("#status").textContent = res;
                     setTimeout(checkStatus, 2000);
