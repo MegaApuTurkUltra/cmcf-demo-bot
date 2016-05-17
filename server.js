@@ -12,12 +12,12 @@ var cloud;
 
 var running = false;
 
-app.post("/cmcf-demo-bot/run", function(req, res){
+app.post("/run", function(req, res){
   setServerStatus(!running);
   res.send("" + running);
 });
 
-app.get("/cmcf-demo-bot/status", function(req, res){
+app.get("/status", function(req, res){
   res.send("" + running);
 });
 
