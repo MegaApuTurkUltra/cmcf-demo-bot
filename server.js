@@ -3,6 +3,9 @@ var express = require('express');
 var path = require('path');
 var app = express();
 
+// CMCF demo bot server
+// by MegaApuTurkUltra
+
 app.use(express.static('public'));
 
 var USERNAME = process.env.SCRATCH_USER;
